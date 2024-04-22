@@ -76,7 +76,7 @@ function GenerateNumber() {
         secondsCounter = 35;
         document.getElementById("counterGame").innerText = secondsCounter;
         typeLevel = 2;
-        let doubleQuest = parseInt(Math.random() * (35 - 13) + 36);
+        let doubleQuest = parseInt(Math.random() * (36 - 13) + 36);
         let power = 2;
         systemResponse = doubleQuest ** power;
         document.getElementById("questGame").innerHTML = `
