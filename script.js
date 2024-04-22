@@ -59,7 +59,7 @@ function GenerateNumber() {
         secondsCounter = 40;
         document.getElementById("counterGame").innerText = secondsCounter;
         typeLevel = 3;
-        let tripleQuest = parseInt(Math.random() * (99 - 36) + 100);
+        let tripleQuest = parseInt(Math.random() * (100 - 36) + 100);
         let power = 2;
         systemResponse = tripleQuest ** power;
         document.getElementById("questGame").innerHTML = `
