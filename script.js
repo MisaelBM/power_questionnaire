@@ -3,6 +3,9 @@ ambienceAudio.loop = true;
 ambienceAudio.volume = 0.1;
 const startAudio = new Audio("biodynamic-impact-braam-tonal-dark-184276.mp3");
 startAudio.volume = 0.4;
+const gameAudio = new Audio("Syn Cole - Feel Good (Instrumental) [NCS Purple Remake](MP3_320K).mp3");
+gameAudio.volume = 0.4;
+gameAudio.loop = true;
 document.getElementById("alertButton").addEventListener('click', () => {
     ambienceAudio.play();
     document.getElementById("alertContent").style.display = "none";
@@ -34,6 +37,7 @@ let secondsCounter;
 let hearts = 2;
 let typeLevel;
 function StartGame() {
+    gameAudio.play();
     punctuation = 0;
     GenerateNumber();
     CounterGame();
