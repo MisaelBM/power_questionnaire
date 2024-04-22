@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power questionnaire</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/65bfbf4940.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="alert-content" id="alertContent">
+        <div class="alert-volume">
+            <i class="fa-solid fa-volume-high"></i> Esse jogo contêm efeitos sonoros.
+        </div>
+        <div class="alert-calculator">
+            <i class="fa-solid fa-calculator"></i> Não utilize calculadora para melhor experiência.
+        </div>
+        <div class="alert-button-content">
+            <button class="alert-button" id="alertButton">OK</button>
+        </div>
+    </div>
+    <main class="main-home" id="mainHome">
+        <div class="title-home-content">
+            <h1 class="home-title">Power Questionnaire</h1>
+        </div>
+        <div class="home-buttons-content">
+            <div class="button-content">
+                <button class="button-home" id="playButton"><i class="fa-solid fa-play"></i> Jogar</button>
+            </div>
+            <div class="button-content">
+                <button class="button-home" id="rankButton"><i class="fa-solid fa-trophy"></i> Rank</button>
+            </div>
+        </div>
+        <div class="fixed-content" id="fixedContent">
+            <div class="name-player-content">
+                <div class="input-player-content">
+                    <input type="text" name="namePlayer" id="namePlayer" class="name-player" placeholder="*Digite seu nickname" maxlength="16">
+                </div>
+                <div class="button-player-content">
+                    <button class="button-player" id="playButtonConfirm">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="get-ready-content" id="getReadyContent">
+        <span class="name-player-span" id="namePlayerSpan">Name</span>
+        <div class="get-ready">Prepare-se!</div>
+    </div>
+    <main class="main-game" id="mainGame">
+        <header class="header-game">
+            <div class="heart-game">
+                <span id="heartGame"><i class="fa-solid fa-heart" id="heart1"></i> <i class="fa-solid fa-heart" id="heart2"></i></span>
+            </div>
+            <div class="counter-game" id="counterGameContent">
+                <span id="counterGame">30</span>
+            </div>
+        </header>
+        <div class="quiz-content">
+            <div class="quest-game">
+                <span id="questGame">
+                    <div class="power-content">
+                        <div class="power">
+                            2
+                        </div>
+                        <div class="number">
+                            2
+                        </div>
+                    </div>
+                </span>
+            </div>
+            <div class="response-game">
+                <input type="number" name="responseGameInput" id="responseGameInput" class="response-game-input">
+                <div class="confirm-response">
+                    <button class="confirm-button" id="confirmButton">Confirmar</button>
+                </div>
+            </div>
+        </div>
+        <footer class="footer-game">
+            <div class="punctuation-game">
+                Pontuação: <span id="punctuationGame">0</span>
+            </div>
+        </footer>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
