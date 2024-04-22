@@ -40,6 +40,7 @@ function StartGame() {
 };
 function NextLevel() {
     punctuation += typeLevel;
+    document.querySelector("#responseGameInput").valeu = null;
     GenerateNumber();
     CounterGame();
     PunctuationVisor();
