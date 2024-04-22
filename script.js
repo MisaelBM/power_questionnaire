@@ -38,13 +38,14 @@ let hearts = 2;
 let typeLevel;
 function StartGame() {
     gameAudio.play();
+    document.querySelector("#responseGameInput").textContent = "";
     punctuation = 0;
     GenerateNumber();
     CounterGame();
 };
 function NextLevel() {
     punctuation += typeLevel;
-    document.getElementById("responseGameInput").textContent = "";
+    document.querySelector("#responseGameInput").textContent = "";
     clearInterval(counterTimer);
     GenerateNumber();
     CounterGame();
