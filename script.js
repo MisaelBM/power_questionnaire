@@ -41,6 +41,7 @@ function StartGame() {
 function NextLevel() {
     punctuation += typeLevel;
     document.getElementById("responseGameInput").textContent = "";
+    clearInterval(counterTimer);
     GenerateNumber();
     CounterGame();
     PunctuationVisor();
