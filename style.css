@@ -261,7 +261,7 @@ main {
     border-radius: 10px;
 }
 .quest-game {
-    width: 200px;
+    width: 300px;
     height: 70px;
     display: flex;
     justify-content: center;
@@ -287,7 +287,7 @@ main {
     font-size: 30px;
 }
 .response-game {
-    width: 200px;
+    width: 300px;
     height: 200px;
     display: flex;
     align-items: center;
@@ -302,6 +302,7 @@ main {
     font-size: 40px;
     text-align: center;
     margin-bottom: 25px;
+    border: 2px solid black;
 }
 .confirm-button {
     width: fit-content;
@@ -313,7 +314,7 @@ main {
     border: 1px solid black;
     border-radius: 10px;
     padding: 10px 20px 10px 20px;
-
+    background-color: rgb(219, 219, 219);
 }
 .footer-game {
     width: 100vw;
@@ -340,5 +341,219 @@ main {
     100% {
         transform: scale(1, 1);
         color: rgb(61, 61, 61);
+    }
+}
+.double-points {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+.double-points-text {
+    font-size: 190px;
+    font-family: "Bebas Neue", sans-serif;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 2px;
+    animation: anim-double-points 1.5s;
+}
+@keyframes anim-double-points {
+    0% {
+        transform: translateY(300px);
+        color: white;
+    }
+    10% {
+        color: rgb(0, 0, 0);
+    }
+    20% {
+        color: rgb(255, 0, 0);
+    }
+    30% {
+        color: rgb(255, 255, 255);
+    }
+    40% {
+        color: black;
+    }
+    50% {
+        color: rgb(255, 0, 0);
+    }
+    60% {
+        color: rgb(255, 255, 255);
+    }
+    70% {
+        color: rgb(0, 0, 0);
+    }
+    80% {
+        color: rgb(255, 0, 0);
+    }
+    90% {
+        color: rgb(255, 255, 255);
+    }
+    100% {
+        transform: translateY(-10px);
+        color: rgb(0, 0, 0);
+    }
+}
+.triple-points {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+.triple-points-text {
+    font-size: 190px;
+    font-family: "Bebas Neue", sans-serif;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 2px;
+    animation: anim-triple-points 1.5s;
+}
+@keyframes anim-triple-points {
+    0% {
+        transform: translateY(-300px);
+        color: white;
+    }
+    10% {
+        color: rgb(0, 0, 0);
+    }
+    20% {
+        color: rgb(0, 81, 255);
+    }
+    30% {
+        color: rgb(255, 255, 255);
+    }
+    40% {
+        color: black;
+    }
+    50% {
+        color: rgb(0, 81, 255);
+    }
+    60% {
+        color: rgb(255, 255, 255);
+    }
+    70% {
+        color: rgb(0, 0, 0);
+    }
+    80% {
+        color: rgb(0, 81, 255);
+    }
+    90% {
+        color: rgb(255, 255, 255);
+    }
+    100% {
+        transform: translateY(0px);
+        color: rgb(0, 0, 0);
+    }
+}
+.you-lose {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    animation: anim-lose-back 4s;
+}
+.you-lose-text {
+    font-size: 190px;
+    font-family: "Bebas Neue", sans-serif;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 2px;
+    animation: anim-you-lose 4s;
+}
+@keyframes anim-you-lose {
+    0% {
+        transform: translateY(300px);
+        color: white;
+    }
+    10% {
+        color: rgb(0, 0, 0);
+    }
+    20% {
+        color: red;
+    }
+    30% {
+        color: rgb(255, 255, 255);
+    }
+    40% {
+        color: black;
+    }
+    50% {
+        color: red;
+    }
+    60% {
+        color: rgb(255, 255, 255);
+    }
+    70% {
+        color: rgb(0, 0, 0);
+    }
+    80% {
+        color: red;
+    }
+    90% {
+        color: rgb(255, 255, 255);
+    }
+    100% {
+        transform: translateY(-10px);
+        color: rgb(0, 0, 0);
+    }
+}
+@keyframes anim-lose-back {
+    0% {
+        background-color: rgba(255, 0, 0, 0.700);
+    }
+    10% {
+        background-color: rgba(255, 0, 0, 0.192);
+    }
+    20% {
+        background-color: rgba(255, 0, 0, 0.700);
+    }
+    30% {
+        background-color: rgba(255, 0, 0, 0.192);
+    }
+    40% {
+        background-color: rgba(255, 0, 0, 0.700);
+    }
+    50% {
+        background-color: rgba(255, 0, 0, 0.192);
+    }
+    60% {
+        background-color: rgba(255, 0, 0, 0.700);;
+    }
+    70% {
+        background-color: rgba(255, 0, 0, 0.192);
+    }
+    80% {
+        background-color: rgba(255, 0, 0, 0.700);
+    }
+    90% {
+        background-color: rgba(255, 0, 0, 0.192);
+    }
+    100% {
+        background-color: rgba(255, 0, 0, 0.700);
+    }
+}
+@media (max-width: 320px) {
+    .response-game {
+        width: 200px;
+    }
+    .quest-game {
+        width: 200px;
+    }
+}
+@media (max-width: 710px) {
+    .double-points-text {
+        font-size: 100px;
+    }
+    .triple-points-text {
+        font-size: 100px;
+    }
+    .you-lose-text {
+        font-size: 70px;
     }
 }
