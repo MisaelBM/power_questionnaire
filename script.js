@@ -235,6 +235,7 @@ function PunctuationVisor() {
 };
 //Funcao que finaliza o jogo
 function finishGame() {
+   document.getElementById("responseGameInput").blur();
     clearInterval(counterTimer);
     gameAudio.pause();
     youLoseAudio.play();
