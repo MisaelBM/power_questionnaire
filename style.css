@@ -354,6 +354,7 @@ main {
 }
 .double-points-text {
     font-size: 190px;
+    text-align: center;
     font-family: "Bebas Neue", sans-serif;
     -webkit-text-stroke-color: black;
     -webkit-text-stroke-width: 2px;
@@ -407,6 +408,7 @@ main {
 }
 .triple-points-text {
     font-size: 190px;
+    text-align: center;
     font-family: "Bebas Neue", sans-serif;
     -webkit-text-stroke-color: black;
     -webkit-text-stroke-width: 2px;
