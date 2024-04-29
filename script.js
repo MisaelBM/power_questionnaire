@@ -251,3 +251,4 @@ function finishGame() {
         }
     ,4000);
 };
+//Kaue
