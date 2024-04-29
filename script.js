@@ -57,8 +57,7 @@ document.getElementById("mainGame").addEventListener("keyup", e => {
     };
 });
 //Funcao que inicia o jogo
-function StartGame() {
-    document.getElementById("responseGameInput").focus();
+function StartGame() {
     gameAudio.play();
     document.querySelector("#responseGameInput").value = '';
     punctuation = 0;
@@ -66,30 +65,33 @@ function StartGame() {
     GenerateNumber();
     if (typeLevel > 1) {
         setTimeout(
-            function () {
+            function () {   
+document.getElementById("responseGameInput").focus();
                 CounterGame();
             }
         ,1500);
     } else {
+document.getElementById("responseGameInput").focus();
         CounterGame();
     };
 };
 //Funcao que passa para proxima conta
 function NextLevel() {
-    punctuation += typeLevel;
-    document.getElementById("responseGameInput").focus();
+    punctuation += typeLevel;
     document.querySelector("#responseGameInput").value = '';
     clearInterval(counterTimer);
     GenerateNumber();
     if (typeLevel > 1 && typeLevel < 5) {
         setTimeout(
             function () {
+document.getElementById("responseGameInput").focus();
                 CounterGame();
                 PunctuationVisor();
                 console.log("time")
             }
         ,1500);
     } else if (typeLevel < 5) {
+document.getElementById("responseGameInput").focus();
         CounterGame();
         PunctuationVisor();
     };
