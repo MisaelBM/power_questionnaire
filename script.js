@@ -368,6 +368,7 @@ function FinishGame() {
     document.getElementById("youLose").style.display = "flex";
     setTimeout(
         function () {
+            document.getElementById("mainGame").style.removeProperty("animation");
             document.getElementById("youLose").style.display = "none";
             document.getElementById("alertContent").style.display = "flex";
             document.getElementById("mainGame").style.display = "none";
