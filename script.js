@@ -13,6 +13,10 @@ const triplePointsAudio = new Audio("cute-level-up-3-189853.mp3");
 triplePointsAudio.volume = 0.6;
 const youLoseAudio = new Audio("verloren-89595.mp3");
 youLoseAudio.volume = 0.6;
+const runTimeAudioBack = new Audio("game-music-loop-5-144569.mp3");
+runTimeAudioBack.volume = 0.6;
+const runTimeEffect = new Audio("cinematic-boom-6872.mp3");
+runTimeEffect.volume = 0.6;
 //Sair do aviso inicial
 document.getElementById("alertButton").addEventListener('click', () => {
     ambienceAudio.play();
@@ -50,10 +54,16 @@ let userResponse;
 let secondsCounter;
 let hearts;
 let typeLevel;
+let lastNumber;
 document.getElementById("mainGame").addEventListener("keyup", e => {
     if (e.key == "Enter") {
-        userResponse = document.querySelector("#responseGameInput").value;
-        userResponse == systemResponse ? NextLevel() : LoseHeart();
+        if (typeLevel == 5) {
+            userResponse = document.querySelector("#responseGameInput").value;
+            userResponse == systemResponse ? NextLevelRunTime() : LoseHeartRunTime();
+        } else {
+            userResponse = document.querySelector("#responseGameInput").value;
+            userResponse == systemResponse ? NextLevel() : LoseHeart();
+        };
     };
 });
 //Funcao que inicia o jogo
@@ -65,12 +75,16 @@ function StartGame() {
     hearts = 2;
     GenerateNumber();
     if (typeLevel > 1) {
-        setTimeout(
-            function () {   
-                document.getElementById("responseGameInput").focus();
-                CounterGame();
-            }
-        ,1500);
+        if (typeLevel == 5) {
+            RunTime();
+        } else {
+            setTimeout(
+                function () {
+                    document.getElementById("responseGameInput").focus();
+                    CounterGame();
+                }
+            ,1500);
+        };
     } else {
         document.getElementById("responseGameInput").focus();
         CounterGame();
@@ -89,32 +103,124 @@ function NextLevel() {
                 document.getElementById("responseGameInput").focus();
                 CounterGame();
                 PunctuationVisor();
-                console.log("time")
             }
         ,1500);
-    } else if (typeLevel < 5) {
+    } else if (typeLevel < 2) {
         document.getElementById("responseGameInput").focus();
         CounterGame();
         PunctuationVisor();
+    } else {
+        RunTime();
     };
 };
+//Funcoes do modo runtime
+let numberQuestions = 10;
 function RunTime() {
-    
+    runTimeEffect.play();
+    gameAudio.pause();
+    document.querySelector("#responseGameInput").value = '';
+    document.getElementById("responseGameInput").focus();
+    document.getElementById("runTime").style.display = "flex";
+    document.getElementById("mainGame").style.animation = "anim-back-run-time 3s infinite";
+    setTimeout(
+        function () {
+            document.getElementById("runTime").style.display = "none";
+            runTimeAudioBack.currentTime = 0;
+            runTimeAudioBack.play();
+            CounterRunTime();
+            GenerateRunTime();
+        }
+    ,1500); 
 };
+let counterSecondsRunTime;
 function CounterRunTime() {
-
+    let seconds = 45;
+    document.getElementById("counterGame").innerText = seconds;
+    counterSecondsRunTime = setInterval(
+        function () {
+            seconds != 0 ? seconds-- : false; 
+            seconds < 10 ? document.getElementById("counterGame").innerText = `0${seconds}` : document.getElementById("counterGame").innerText = seconds;
+            seconds == 0 ? FinishGame() : false;
+        }
+    ,1000);
+};
+function GenerateRunTime() {         
+    let questRunTime = parseInt(Math.random() * 13);
+    while (questRunTime == lastNumber) {
+        questRunTime = parseInt(Math.random() * 13);
+    };
+    lastNumber = questRunTime;
+    if (questRunTime <= 5 || questRunTime == 10) {
+        let powerRunTime = parseInt(Math.random() * 4);
+        systemResponse = questRunTime ** powerRunTime;
+        document.getElementById("questGame").innerHTML = `
+            <div class="power-content">
+                <div class="power">
+                    ${powerRunTime}
+                </div>
+                <div class="number">
+                    ${questRunTime}
+                </div>
+            </div>
+        `;
+    } else {
+        let powerRunTime = 2;
+        systemResponse = questRunTime ** powerRunTime;
+        document.getElementById("questGame").innerHTML = `
+            <div class="power-content">
+                <div class="power">
+                    ${powerRunTime}
+                </div>
+                <div class="number">
+                    ${questRunTime}
+                </div>
+            </div>
+        `;
+    };    
 };
 function LoseHeartRunTime() {
-
+    hearts--;
+    if (hearts == 1) {
+        document.getElementById("heart2").style.animation = "heart-anim 1s ease-in-out";
+        document.getElementById("heart2").style.color = "rgb(61, 61, 61)";
+    } else {
+        document.getElementById("heart1").style.animation = "heart-anim 1s ease-in-out";
+        document.getElementById("heart1").style.color = "rgb(61, 61, 61)";
+    };
+    hearts == 0 ? FinishGame() : NextLevelRunTime();
 };
 function NextLevelRunTime() {
-
+    --numberQuestions;
+    document.querySelector("#responseGameInput").value = '';
+    if (numberQuestions == 0) {
+        FinishRunTime();
+    } else {
+        GenerateRunTime();
+        document.getElementById("responseGameInput").focus();
+    };
+};
+function FinishRunTime() {
+    clearInterval(counterSecondsRunTime);
+    hearts = 2;
+    document.getElementById("heart2").style.color = "red";
+    document.getElementById("heart1").style.color = "red";
+    numberQuestions = 10;
+    runTimeAudioBack.pause();
+    document.getElementById("mainGame").style.removeProperty("animation");
+    document.getElementById("runTimeWin").style.display = "flex";
+    setTimeout(
+        function () {
+            document.getElementById("runTimeWin").style.display = "none";
+            gameAudio.play();
+            NextLevel();
+        }
+    ,1500);
 };
 //Funcao que gera uma conta aleatoria
 function GenerateNumber() {
     randomPercentage = parseInt(Math.random() * 100);
 //Run Time    
-    if (false) {
+    if (randomPercentage <= 4) {
         typeLevel = 5;
 //Triple points        
     } else if (randomPercentage > 4 && randomPercentage <= 14) {
@@ -129,6 +235,10 @@ function GenerateNumber() {
             }
         ,1500);
         let tripleQuest = parseInt(Math.random() * (100 - 36) + 36);
+        while (tripleQuest == lastNumber) {
+            tripleQuest = parseInt(Math.random() * (100 - 36) + 36);
+        };
+        lastNumber = tripleQuest;
         let power = 2;
         systemResponse = tripleQuest ** power;
         document.getElementById("questGame").innerHTML = `
@@ -154,6 +264,10 @@ function GenerateNumber() {
             }
         ,1500);
         let doubleQuest = parseInt(Math.random() * (36 - 13) + 13);
+        while (doubleQuest == lastNumber) {
+            doubleQuest = parseInt(Math.random() * (36 - 13) + 13);
+        };
+        lastNumber = doubleQuest;
         let power = 2;
         systemResponse = doubleQuest ** power;
         document.getElementById("questGame").innerHTML = `
@@ -171,7 +285,11 @@ function GenerateNumber() {
         secondsCounter = 30;
         document.getElementById("counterGame").innerText = secondsCounter;
         typeLevel = 1;
-        let normalQuest = parseInt(Math.random() * 12);
+        let normalQuest = parseInt(Math.random() * 13);
+        while (normalQuest == lastNumber) {
+            normalQuest = parseInt(Math.random() * 13);
+        };
+        lastNumber = normalQuest;
         if (normalQuest <= 5 || normalQuest == 10) {
             let power = parseInt(Math.random() * 5);
             systemResponse = normalQuest ** power;
@@ -202,12 +320,18 @@ function GenerateNumber() {
     };
 };
 document.getElementById("confirmButton").addEventListener('click', () => {
-    userResponse = document.querySelector("#responseGameInput").value;
-    userResponse == systemResponse ? NextLevel() : LoseHeart();
+    if (typeLevel == 5) {
+        userResponse = document.querySelector("#responseGameInput").value;
+        userResponse == systemResponse ? NextLevelRunTime() : LoseHeartRunTime();
+    } else {
+        userResponse = document.querySelector("#responseGameInput").value;
+        userResponse == systemResponse ? NextLevel() : LoseHeart();
+    };
 });
 //Funcao do cronometro
 let counterTimer;
 function CounterGame() {
+    document.getElementById("counterGame").innerText = secondsCounter;
     counterTimer = setInterval(
         function () {
             secondsCounter--;
@@ -227,16 +351,18 @@ function LoseHeart() {
         document.getElementById("heart1").style.animation = "heart-anim 1s ease-in-out";
         document.getElementById("heart1").style.color = "rgb(61, 61, 61)";
     };
-    hearts == 0 ? finishGame() : NextLevel();
+    hearts == 0 ? FinishGame() : NextLevel();
 };
 //Funcao que mostra pontos na tela
 function PunctuationVisor() {
     document.getElementById("punctuationGame").innerHTML = punctuation;
 };
 //Funcao que finaliza o jogo
-function finishGame() {
+function FinishGame() {
    document.getElementById("responseGameInput").blur();
     clearInterval(counterTimer);
+    clearInterval(counterSecondsRunTime);
+    runTimeAudioBack.pause();
     gameAudio.pause();
     youLoseAudio.play();
     document.getElementById("youLose").style.display = "flex";
@@ -252,4 +378,4 @@ function finishGame() {
         }
     ,4000);
 };
-//Kaue
+//By: Misael Bonifácio Morgado.
