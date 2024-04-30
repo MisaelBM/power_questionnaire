@@ -541,31 +541,6 @@ main {
         background-color: rgba(255, 0, 0, 0.700);
     }
 }
-@media (max-width: 320px) {
-    .response-game {
-        width: 200px;
-    }
-    .quest-game {
-        width: 200px;
-    }
-}
-@media (max-width: 710px) {
-    .double-points-text {
-        font-size: 100px;
-    }
-    .triple-points-text {
-        font-size: 100px;
-    }
-    .you-lose-text {
-        font-size: 70px;
-    }
-    .run-time-text {
-        font-size: 100px;
-    }
-    .run-time-win-text {
-        font-size: 70px;
-    }
-}
 .run-time {
     width: 100vw;
     height: 100vh;
@@ -707,5 +682,30 @@ main {
     100% {
         transform: translateY(0px);
         color: rgb(0, 0, 0);
+    }
+}
+@media (max-width: 320px) {
+    .response-game {
+        width: 200px;
+    }
+    .quest-game {
+        width: 200px;
+    }
+}
+@media (max-width: 710px) {
+    .double-points-text {
+        font-size: 100px;
+    }
+    .triple-points-text {
+        font-size: 100px;
+    }
+    .you-lose-text {
+        font-size: 70px;
+    }
+    .run-time-text {
+        font-size: 100px;
+    }
+    .run-time-win-text {
+        font-size: 70px;
     }
 }
