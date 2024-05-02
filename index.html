@@ -40,10 +40,30 @@
         <div class="fixed-content" id="fixedContent">
             <div class="name-player-content">
                 <div class="input-player-content">
-                    <input type="text" name="namePlayer" id="namePlayer" class="name-player" placeholder="*Digite seu nickname" maxlength="16">
+                    <input type="text" name="namePlayer" id="namePlayer" class="name-player" placeholder="*Digite seu nickname" maxlength="11">
                 </div>
                 <div class="button-player-content">
                     <button class="button-player" id="playButtonConfirm">Confirmar</button>
+                </div>
+            </div>
+        </div>
+        <div class="rank-content" id="rankContent">
+            <div class="rank-visor">
+                <div class="exit-rank">
+                    <button id="exitRank" class="button-exit-rank">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                </div>
+                <div class="clear-rank">
+                    <button class="button-clear-rank" id="clearRank">
+                        <i class="fa-solid fa-trash"></i> Apagar Rank
+                    </button>
+                </div>
+                <div class="rank-text-content">
+                    <div class="title-rank">
+                        <h2><i class="fa-solid fa-trophy"></i> Rank</h2>
+                    </div>
+                    <span class="rank-list-span" id="rankSpan"></span>
                 </div>
             </div>
         </div>
