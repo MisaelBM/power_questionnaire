@@ -1,4 +1,6 @@
 //Variaveis iniciais
+localStorage.Rank == undefined ? localStorage.setItem("Rank", "[]") : false;
+let rankArray = JSON.parse(localStorage.getItem("Rank"));
 const ambienceAudio = new Audio("Electro Light Loop.mp3");
 ambienceAudio.loop = true;
 ambienceAudio.volume = 0.1;
@@ -17,18 +19,45 @@ const runTimeAudioBack = new Audio("game-music-loop-5-144569.mp3");
 runTimeAudioBack.volume = 0.6;
 const runTimeEffect = new Audio("cinematic-boom-6872.mp3");
 runTimeEffect.volume = 0.6;
+const winRunTimeAudio = new Audio("cute-level-up-3-189853.mp3");
+winRunTimeAudio.volume = 0.6;
 //Sair do aviso inicial
 document.getElementById("alertButton").addEventListener('click', () => {
     ambienceAudio.play();
     document.getElementById("alertContent").style.display = "none";
     document.getElementById("mainHome").style.display = "flex";
 });
+//Funcao que cria a tabela do rank
+function RankConstructor() {
+    rankArray.sort((a, b) => b.punctuationPlayer - a.punctuationPlayer);
+    localStorage.removeItem("Rank");
+    localStorage.setItem("Rank", JSON.stringify(rankArray));
+};
+document.getElementById("rankButton").addEventListener('click', () => {
+    document.getElementById("rankContent").style.display = "flex";
+    ViewRank();
+});
+//Funcao mostra tabela do rank
+function ViewRank() {
+    document.getElementById("rankSpan").innerHTML = "";
+    let arr = JSON.parse(localStorage.getItem("Rank"));
+    arr.forEach(e => {
+        document.getElementById("rankSpan").innerHTML += `<div class="li-rank">${e.namePlayerRank} | pontuação: ${e.punctuationPlayer}</div>`
+    });
+};
+document.getElementById("exitRank").addEventListener('click', () => document.getElementById("rankContent").style.display = "none");
+document.getElementById("clearRank").addEventListener('click', () => {
+    localStorage.setItem("Rank", "[]");
+    rankArray = JSON.parse(localStorage.getItem("Rank"));
+    ViewRank();
+});
 //Colocar nome do player
 document.getElementById("playButton").addEventListener('click', () => document.getElementById("fixedContent").style.display = "flex");
 document.getElementById("playButtonConfirm").addEventListener("click", ConfirmPlay);
 document.getElementById("fixedContent").addEventListener('keyup', e => e.key == "Enter" ? ConfirmPlay() : false);
+let namePlayer;
 function ConfirmPlay() {
-    let namePlayer = document.querySelector("#namePlayer").value;
+    namePlayer = document.querySelector("#namePlayer").value;
     if (namePlayer) {
         document.querySelector("#namePlayer").value = "";
         ambienceAudio.pause();
@@ -66,6 +95,14 @@ document.getElementById("mainGame").addEventListener("keyup", e => {
         };
     };
 });
+//Funcao que adiciona mais um jogador ao rank
+function AddRank() {
+    rankArray.push({
+        namePlayerRank: namePlayer,
+        punctuationPlayer: punctuation,
+    });
+    RankConstructor();
+};
 //Funcao que inicia o jogo
 function StartGame() {
     document.getElementById("responseGameInput").blur();
@@ -164,12 +201,11 @@ function GenerateRunTime() {
             </div>
         `;
     } else {
-        let powerRunTime = 2;
-        systemResponse = questRunTime ** powerRunTime;
+        systemResponse = questRunTime ** 2;
         document.getElementById("questGame").innerHTML = `
             <div class="power-content">
                 <div class="power">
-                    ${powerRunTime}
+                    2
                 </div>
                 <div class="number">
                     ${questRunTime}
@@ -206,6 +242,7 @@ function FinishRunTime() {
     document.getElementById("heart1").style.color = "red";
     numberQuestions = 10;
     runTimeAudioBack.pause();
+    winRunTimeAudio.play();
     document.getElementById("mainGame").style.removeProperty("animation");
     document.getElementById("runTimeWin").style.display = "flex";
     setTimeout(
@@ -239,12 +276,11 @@ function GenerateNumber() {
             tripleQuest = parseInt(Math.random() * (100 - 36) + 36);
         };
         lastNumber = tripleQuest;
-        let power = 2;
-        systemResponse = tripleQuest ** power;
+        systemResponse = tripleQuest ** 2;
         document.getElementById("questGame").innerHTML = `
             <div class="power-content">
                 <div class="power">
-                    ${power}
+                    2
                 </div>
                 <div class="number">
                     ${tripleQuest}
@@ -268,12 +304,11 @@ function GenerateNumber() {
             doubleQuest = parseInt(Math.random() * (36 - 13) + 13);
         };
         lastNumber = doubleQuest;
-        let power = 2;
-        systemResponse = doubleQuest ** power;
+        systemResponse = doubleQuest ** 2;
         document.getElementById("questGame").innerHTML = `
             <div class="power-content">
                 <div class="power">
-                    ${power}
+                    2
                 </div>
                 <div class="number">
                     ${doubleQuest}
@@ -304,12 +339,11 @@ function GenerateNumber() {
                 </div>
             `;
         } else {
-            let power = 2;
-            systemResponse = normalQuest ** power;
+            systemResponse = normalQuest ** 2;
             document.getElementById("questGame").innerHTML = `
                 <div class="power-content">
                     <div class="power">
-                        ${power}
+                        2
                     </div>
                     <div class="number">
                         ${normalQuest}
@@ -362,6 +396,7 @@ function FinishGame() {
    document.getElementById("responseGameInput").blur();
     clearInterval(counterTimer);
     clearInterval(counterSecondsRunTime);
+    AddRank();
     runTimeAudioBack.pause();
     gameAudio.pause();
     youLoseAudio.play();
