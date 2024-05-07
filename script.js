@@ -151,8 +151,9 @@ function NextLevel() {
     };
 };
 //Funcoes do modo runtime
-let numberQuestions = 10;
+let numberQuestions;
 function RunTime() {
+    numberQuestions = 10;
     runTimeEffect.play();
     gameAudio.pause();
     document.querySelector("#responseGameInput").value = '';
