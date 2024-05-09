@@ -361,10 +361,14 @@ function GenerateNumber() {
 document.getElementById("confirmButton").addEventListener('click', () => {
     if (typeLevel == 5) {
         userResponse = document.querySelector("#responseGameInput").value;
-        userResponse == systemResponse ? NextLevelRunTime() : LoseHeartRunTime();
+        if (userResponse) {
+            userResponse == systemResponse ? NextLevelRunTime() : LoseHeartRunTime();
+        };
     } else {
         userResponse = document.querySelector("#responseGameInput").value;
-        userResponse == systemResponse ? NextLevel() : LoseHeart();
+        if (userResponse) {
+            userResponse == systemResponse ? NextLevel() : LoseHeart();
+        };
     };
 });
 //Funcao do cronometro
