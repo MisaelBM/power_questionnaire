@@ -758,6 +758,114 @@ main {
         color: rgb(0, 0, 0);
     }
 }
+.right-quest {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+.right-quest-text {
+    font-size: 190px;
+    text-align: center;
+    font-family: "Bebas Neue", sans-serif;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 2px;
+    animation: anim-right-quest 1s;
+}
+@keyframes anim-right-quest {
+    0% {
+        transform: translateY(-300px);
+        color: rgb(54, 255, 47);
+    }
+    10% {
+        color: rgb(0, 0, 0);
+    }
+    20% {
+        color: white;
+    }
+    30% {
+        color: rgb(54, 255, 47);
+    }
+    40% {
+        color: black;
+    }
+    50% {
+        color: white;
+    }
+    60% {
+        color: rgb(54, 255, 47);
+    }
+    70% {
+        color: rgb(0, 0, 0);
+    }
+    80% {
+        color: white;
+    }
+    90% {
+        color: rgb(54, 255, 47);
+    }
+    100% {
+        transform: translateY(0px);
+        color: rgb(0, 0, 0);
+    }
+}
+.wrong-quest {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+.wrong-quest-text {
+    font-size: 190px;
+    text-align: center;
+    font-family: "Bebas Neue", sans-serif;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 2px;
+    animation: anim-wrong-quest 1s;
+}
+@keyframes anim-wrong-quest {
+    0% {
+        transform: translateY(-300px);
+        color: rgb(255, 71, 47);
+    }
+    10% {
+        color: rgb(0, 0, 0);
+    }
+    20% {
+        color: white;
+    }
+    30% {
+        color: rgb(255, 71, 47);
+    }
+    40% {
+        color: black;
+    }
+    50% {
+        color: white;
+    }
+    60% {
+        color: rgb(255, 71, 47);
+    }
+    70% {
+        color: rgb(0, 0, 0);
+    }
+    80% {
+        color: white;
+    }
+    90% {
+        color: rgb(255, 71, 47);
+    }
+    100% {
+        transform: translateY(0px);
+        color: rgb(0, 0, 0);
+    }
+}
 @media (max-width: 320px) {
     .response-game {
         width: 200px;
@@ -783,6 +891,12 @@ main {
         font-size: 100px;
     }
     .run-time-win-text {
+        font-size: 70px;
+    }
+    .right-quest-text {
+        font-size: 70px;
+    }
+    .wrong-quest-text {
         font-size: 70px;
     }
 }
