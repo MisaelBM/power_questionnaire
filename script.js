@@ -1,3 +1,4 @@
+
 //Variaveis iniciais
 localStorage.Rank == undefined ? localStorage.setItem("Rank", "[]") : false;
 let rankArray = JSON.parse(localStorage.getItem("Rank"));
@@ -21,6 +22,10 @@ const runTimeEffect = new Audio("cinematic-boom-6872.mp3");
 runTimeEffect.volume = 0.6;
 const winRunTimeAudio = new Audio("cute-level-up-3-189853.mp3");
 winRunTimeAudio.volume = 0.6;
+const rightAudio = new Audio("rising-funny-game-effect-132474.mp3");
+rightAudio.volume = 0.6;
+const wrongAudio = new Audio("wrong-47985.mp3");
+wrongAudio.volume = 0.6;
 //Sair do aviso inicial
 document.getElementById("alertButton").addEventListener('click', () => {
     ambienceAudio.play();
@@ -94,7 +99,7 @@ document.getElementById("mainGame").addEventListener("keyup", e => {
         } else {
             userResponse = document.querySelector("#responseGameInput").value;
             if (userResponse) {
-                userResponse == systemResponse ? NextLevel() : LoseHeart();
+                userResponse == systemResponse ? NextLevel(true) : LoseHeart();
             };
         };
     };
@@ -132,26 +137,78 @@ function StartGame() {
     };
 };
 //Funcao que passa para proxima conta
-function NextLevel() {
+function NextLevel(right) {
     punctuation += typeLevel;
     document.getElementById("responseGameInput").blur();
     document.querySelector("#responseGameInput").value = '';
-    clearInterval(counterTimer);
-    GenerateNumber();
-    if (typeLevel > 1 && typeLevel < 5) {
+    if (right && typeLevel !== 5) {
+        document.getElementById("rightQuest").style.display = "flex";
+        rightAudio.play();
         setTimeout(
             function () {
-                document.getElementById("responseGameInput").focus();
-                CounterGame();
-                PunctuationVisor();
+                document.getElementById("rightQuest").style.display = "none";
+                clearInterval(counterTimer);
+                GenerateNumber();
+                if (typeLevel > 1 && typeLevel < 5) {
+                    setTimeout(
+                        function () {
+                            document.getElementById("responseGameInput").focus();
+                            CounterGame();
+                            PunctuationVisor();
+                        }
+                    ,1500);
+                } else if (typeLevel < 2) {
+                    document.getElementById("responseGameInput").focus();
+                    CounterGame();
+                    PunctuationVisor();
+                } else {
+                    RunTime();
+                };
             }
-        ,1500);
-    } else if (typeLevel < 2) {
-        document.getElementById("responseGameInput").focus();
-        CounterGame();
-        PunctuationVisor();
+        ,1000);
+    } else if (!right && typeLevel !== 5) {
+        document.getElementById("wrongQuest").style.display = "flex";
+        wrongAudio.play();
+        setTimeout(
+            function () {
+                document.getElementById("wrongQuest").style.display = "none";
+                clearInterval(counterTimer);
+                GenerateNumber();
+                if (typeLevel > 1 && typeLevel < 5) {
+                    setTimeout(
+                        function () {
+                            document.getElementById("responseGameInput").focus();
+                            CounterGame();
+                            PunctuationVisor();
+                        }
+                    ,1500);
+                } else if (typeLevel < 2) {
+                    document.getElementById("responseGameInput").focus();
+                    CounterGame();
+                    PunctuationVisor();
+                } else {
+                    RunTime();
+                };
+            }
+        ,1000);
     } else {
-        RunTime();
+        clearInterval(counterTimer);
+        GenerateNumber();
+        if (typeLevel > 1 && typeLevel < 5) {
+            setTimeout(
+                function () {
+                    document.getElementById("responseGameInput").focus();
+                    CounterGame();
+                    PunctuationVisor();
+                }
+            ,1500);
+        } else if (typeLevel < 2) {
+            document.getElementById("responseGameInput").focus();
+            CounterGame();
+            PunctuationVisor();
+        } else {
+            RunTime();
+        };
     };
 };
 //Funcoes do modo runtime
@@ -367,7 +424,7 @@ document.getElementById("confirmButton").addEventListener('click', () => {
     } else {
         userResponse = document.querySelector("#responseGameInput").value;
         if (userResponse) {
-            userResponse == systemResponse ? NextLevel() : LoseHeart();
+            userResponse == systemResponse ? NextLevel(true) : LoseHeart();
         };
     };
 });
@@ -394,7 +451,7 @@ function LoseHeart() {
         document.getElementById("heart1").style.animation = "heart-anim 1s ease-in-out";
         document.getElementById("heart1").style.color = "rgb(61, 61, 61)";
     };
-    hearts == 0 ? FinishGame() : NextLevel();
+    hearts == 0 ? FinishGame() : NextLevel(false);
 };
 //Funcao que mostra pontos na tela
 function PunctuationVisor() {
